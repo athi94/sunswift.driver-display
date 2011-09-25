@@ -18,13 +18,13 @@ BUILD = ./build# never . or clean will delete everything
 SRC = ./src
 
 # Custom project objects
-OBJECTS  = $(MAIN_NAME).o scandal_obligations.o
+OBJECTS  = $(MAIN_NAME).o lcd.o scandal_obligations.o
 # Scandal objects
 OBJECTS += engine.o error.o manager.o maths.o message.o utils.o stdio.o leds.o wavesculptor.o
 # Driver objects
 OBJECTS += can.o flash.o uart.o gpio.o timer.o wdt.o system.o
 # Add other objects here or in the architecture specific makefile
-OBJECTS +=
+OBJECTS += 
 
 CFLAGS  = -I$(SCANDAL)/include # for scandal includes
 CFLAGS += -I$(ARCH)/include # for arch drivers

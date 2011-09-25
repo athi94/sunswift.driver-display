@@ -71,6 +71,8 @@
 #include <arch/types.h>
 #include <arch/i2c.h>
 
+#include <project/lcd.h>
+
 /* Do some general setup for clocks, LEDs and interrupts
  * and UART stuff on the MSP430 */
 void setup(void) {
@@ -81,6 +83,7 @@ void setup(void) {
 	GPIO_SetValue(RED_LED_PORT, RED_LED_BIT, 1);
 
 
+    //TODO clean up
 	GPIO_SetDir(1, 8, 1);
 	GPIO_SetValue(1, 8, 0);
 	GPIO_SetDir(1, 9, 1);
@@ -88,13 +91,6 @@ void setup(void) {
 
 } // setup
 
-#if defined(IN_CHANNEL_EXAMPLE)
-/* This is an in-channel handler. It gets called when a message comes in on the
- * registered node/channel combination as set up using the USB-CAN. */
-void in_channel_0_handler(int32_t value, uint32_t src_time) {
-	UART_printf("in_channel_0_handler got called with value %d time at source %u\n\r", (int)value, (unsigned int)src_time);
-}
-#endif
 
 /* This is your main function! You should have an infinite loop in here that
  * does all the important stuff your node was designed for */
@@ -108,8 +104,8 @@ int main(void) {
 	scandal_init();
 
 	/* Set LEDs to known states */
-	red_led(0);
-	yellow_led(1);
+	//red_led(0);
+	//yellow_led(1);
 
 	/* Initialise UART0 */
 	UART_Init(115200);
@@ -118,17 +114,14 @@ int main(void) {
 	scandal_delay(100);
 
 	/* Display welcome header over UART */
-	UART_printf("Welcome to the template project! This is coming out over UART0\n\r");
-	UART_printf("A debug LED should blink at a rate of 1HZ\n\r");
+	UART_printf("Driver Display\n\r");
 
 	sc_time_t one_sec_timer = sc_get_timer();
 
-#if defined(IN_CHANNEL_EXAMPLE)
-	UART_printf("If you configure the in channel 0, a message should print upon receipt of such a channel message\n\r");
-	sc_time_t in_timer = sc_get_timer();
-	scandal_register_in_channel_handler(0, &in_channel_0_handler);
-#endif
+    LCD_Init();
 
+    LCD_Print("hello world", 0, 11, 0);
+    
 	/* This is the main loop, go for ever! */
 	while (1) {
 		/* This checks whether there are pending requests from CAN, and sends a heartbeat message.
@@ -151,32 +144,13 @@ int main(void) {
 			/* Twiddle the LEDs */
 			toggle_red_led();
 			toggle_yellow_led();
-
+			GPIO_SetValue(BLINK_L_PORT, BLINK_L_PIN, 1);
+            GPIO_SetValue(YELLOW_LED_PORT, YELLOW_LED_BIT, 1);
+            
 			/* Update the timer */
 			one_sec_timer = sc_get_timer();
 		}
-
-#if defined(IN_CHANNEL_EXAMPLE)
-		/* The old way of checking for an incoming message that you've registered for.
-		 * This is a silly way to do this. A better way is to use the scandal_register_in_channel_handler
-		 * feature. Your function will get called when a new message comes in */
-		if(scandal_get_in_channel_rcvd_time(TEMPLATE_TEST_IN) > in_timer) {
-
-			UART_printf("I received a channel message in the main loop on in_channel 0, value %u at time %d\n\r", 
-				(unsigned int)scandal_get_in_channel_value(TEMPLATE_TEST_IN), 
-				(int)scandal_get_in_channel_rcvd_time(TEMPLATE_TEST_IN)
-			);
-
-			if(scandal_get_in_channel_value(TEMPLATE_TEST_IN) == 1) {
-				toggle_red_led();
-			} else {
-				toggle_yellow_led();
-			}
-
-			in_timer = scandal_get_in_channel_rcvd_time(TEMPLATE_TEST_IN);
-		}
-#endif
-
+		
 		/* Tickle the watchdog so we don't reset */
 		WDT_Feed();
 	}
