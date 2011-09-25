@@ -37,6 +37,18 @@
 #define CONFIG_ENABLE_DRIVER_I2C						1
 #define CONFIG_I2C_DEFAULT_I2C_IRQHANDLER				1
 
+/* LCD Specific */
+#define ROW 16
+#define LINE 16
+#define D_PLACES		3			// since milliblah
+#define DIGITS			5			// number of characters for each cell
+#define CELL_MAX_VAL	100000
+#define BYTE			8
+#define WELCOME_DELAY	5000
+#define SHORT_DELAY			200
+#define MSG_TIME		10000		// amount of time to display text message for
+#define CELL_OLD		3000		// cells are considered old if they haven't been updated for a while
+
 
  /* DRIVER_CONFIG_H_ */
 #endif

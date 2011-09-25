@@ -1,5 +1,5 @@
 #define RED_LED_PORT 0		// Port for led
-#define RED_LED_BIT 1		// Bit on port for led
+#define RED_LED_BIT 2		// Bit on port for led
 #define YELLOW_LED_PORT 0		// Port for led
 #define YELLOW_LED_BIT 1		// Bit on port for led
 #define LED_TOGGLE_TICKS 100 // 100 ticks = 1 Hz flash rate

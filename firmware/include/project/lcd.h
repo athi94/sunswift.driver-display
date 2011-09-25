@@ -28,8 +28,10 @@
 #define BLINK_R_PORT    1
 #define BLINK_R_PIN     9
 
-void LCD_Init();
-
-int LCD_Print(char * str, int row, int len, int offset);
+void lcdOn(void);
+void lcdInit(void);
+void lcdInstr(uint8_t outbyte);
+void lcdPutc(uint8_t outbyte);
+void lcdPuts(char *string);
 
 #endif //_LCD_H_
