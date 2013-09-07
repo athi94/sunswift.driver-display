@@ -4,7 +4,7 @@ LINKER = $(ARCH)/linker
 CMSIS = $(ARCH)/cmsis
 STARTUP = $(ARCH)/startup
 START_PROGRAMMER = $(UTILS)/dfu-util
-FLASH_CHIP = crt_emu_lpc11_13_nxp
+FLASH_CHIP = /usr/local/lpcxpresso_5.2.6_2137/lpcxpresso/bin/crt_emu_lpc11_13_nxp
 CHECKSUM = checksum
 
 # architecture

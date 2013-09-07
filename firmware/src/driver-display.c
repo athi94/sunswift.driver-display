@@ -56,19 +56,24 @@ typedef enum lcd_alignment{
  *   --------------------
  * Precharge    Cruise Cont
  */
-#define SPEED_LOCATION      10
+#define SPEED_LOCATION      11
 #define SPEED_ROW           0
-#define SPEED_SIZE          10
+#define SPEED_SIZE          6
 #define SPEED_DECIMAL       2
-#define SPEED_ALIGNMENT     LCD_A_RIGHT
+#define SPEED_ALIGNMENT     LCD_A_LEFT
 static u32 speed_updated;
 
-#define BUSV_LOCATION       0
-#define BUSV_ROW            0
-#define BUSV_SIZE           10
-#define BUSV_DECIMAL        2
-#define BUSV_ALIGNMENT      LCD_A_LEFT
-static u32 busv_updated;
+#define LTOPSCROLL_LOCATION       4
+#define LTOPSCROLL_ROW            0
+#define LTOPSCROLL_SIZE           3
+#define LTOPSCROLL_DECIMAL  	  0
+#define LTOPSCROLL_ALIGNMENT      LCD_A_RIGHT
+
+#define LBOTTOMSCROLL_LOCATION	4
+#define LBOTTOMSCROLL_ROW	1
+#define LBOTTOMSCROLL_SIZE	3
+#define LBOTTOMSCROLL_DECIMAL   0
+#define LBOTTOMSCROLL_ALIGNMENT	LCD_A_RIGHT
 
 #define CC_LOCATION         18
 #define CC_ROW              1
@@ -76,7 +81,7 @@ static u32 busv_updated;
 #define CC_MESSAGE_OFF      "  "
 static u32 cc_updated;
 
-#define PC_LOCATION         0
+#define PC_LOCATION         11
 #define PC_ROW              1
 #define PC_MESSAGE_ON       "PC"
 #define PC_MESSAGE_OFF      "  "
@@ -123,7 +128,11 @@ static void updateNumber(int num, int loc, int row, int length,
     }
     
     for(i = 0; i < length; i++){
-        message[i + loc] = buffer[i]; 
+	if(row == 0) {
+        	message[i + loc] = buffer[i]; 
+	} else {
+        	message[i + loc + 20] = buffer[i]; 
+	}
     }
 }
 
@@ -148,8 +157,8 @@ static void drawLCD(){
     lcdPuts(message + LCD_ROW_LENGTH, 0, 1);
 }
 
-#define WELCOME_MSG1 "SUNSWift IVy        "
-#define WELCOME_MSG2 "      Driver Display"
+#define WELCOME_MSG1 "SUNSWIFT eVe        "
+#define WELCOME_MSG2 "   wear sunscreen   "
 /*
  * Simply displays a welcome message
  */
@@ -178,7 +187,7 @@ void setup(void) {
 	GPIO_SetValue(RED_LED_PORT, RED_LED_BIT, 1);
     */
     
-    WDT_Init(); 
+    //WDT_Init(); 
 	scandal_init();
 	UART_Init(115200);
 	
@@ -194,35 +203,65 @@ void setup(void) {
 
 int main(void) {
 	/* Initialise everything */
+	sc_time_t timer = 0;
+	int displaycount = -1;
+
 	setup();
+	timer=sc_get_timer();
 
     while (1) {
         handle_scandal();
-		
-		/* Update all the values to display, these are done on a case by case basis */
-        if(scandal_get_in_channel_rcvd_time(SPEED_CHANNEL) > speed_updated){
-            updateNumber(scandal_get_in_channel_value(SPEED_CHANNEL), SPEED_LOCATION, SPEED_ROW,
+	if(sc_get_timer()>(timer+2000)){
+		displaycount=(displaycount + 1)%4;
+		if (displaycount==0){
+			updateString("BUS", 0, 0);
+            		updateNumber(/*scandal_get_in_channel_value(SPEED_CHANNEL)*/100, LTOPSCROLL_LOCATION, LTOPSCROLL_ROW, LTOPSCROLL_SIZE, LTOPSCROLL_ALIGNMENT, LTOPSCROLL_DECIMAL);
+			updateString("V", 7, 0);
+			
+		}
+		else if (displaycount==1){
+			updateString("BAT", 0, 0);
+			updateNumber(/*scandal_get_in_channel_value(SPEED_CHANNEL)*/60, LTOPSCROLL_LOCATION, LTOPSCROLL_ROW, LTOPSCROLL_SIZE, LTOPSCROLL_ALIGNMENT, LTOPSCROLL_DECIMAL);
+			updateString("V", 7, 0);
+		}
+		else if (displaycount==2){
+			updateString("BAT", 0, 0);
+			updateNumber(/*scandal_get_in_channel_value(SPEED_CHANNEL)*/123, LTOPSCROLL_LOCATION, LTOPSCROLL_ROW, LTOPSCROLL_SIZE, LTOPSCROLL_ALIGNMENT, LTOPSCROLL_DECIMAL);
+			updateString("A", 7, 0);
+		}
+		else if (displaycount==3){
+			updateString("CHG", 0, 0);
+			updateNumber(/*scandal_get_in_channel_value(SPEED_CHANNEL)*/40, LTOPSCROLL_LOCATION, LTOPSCROLL_ROW, LTOPSCROLL_SIZE, LTOPSCROLL_ALIGNMENT, LTOPSCROLL_DECIMAL);
+			updateString("%", 7, 0);
+		}
+
+		if(displaycount == 0 || displaycount == 1) {
+			updateNumber(/*scandal_get_in_channel_value(SPEED_CHANNEL)*/40, LBOTTOMSCROLL_LOCATION, LBOTTOMSCROLL_ROW, LBOTTOMSCROLL_SIZE, LBOTTOMSCROLL_ALIGNMENT, LBOTTOMSCROLL_DECIMAL);
+			updateString("BAT", 0, 1);
+			updateString("C", 7, 1);
+		}
+		else if(displaycount == 2 || displaycount == 3) {
+			updateNumber(/*scandal_get_in_channel_value(SPEED_CHANNEL)*/1, LBOTTOMSCROLL_LOCATION, LBOTTOMSCROLL_ROW, LBOTTOMSCROLL_SIZE, LBOTTOMSCROLL_ALIGNMENT, LBOTTOMSCROLL_DECIMAL);
+			updateString("MCT", 0, 1);
+			updateString("C", 7, 1);
+		}
+		timer = sc_get_timer();
+        }
+
+		updateNumber(scandal_get_in_channel_value(SPEED_CHANNEL), SPEED_LOCATION, SPEED_ROW,
                 SPEED_SIZE, SPEED_ALIGNMENT, SPEED_DECIMAL);
-        }
-        
-        if(scandal_get_in_channel_rcvd_time(BUSV_CHANNEL) > busv_updated){
-            updateNumber(scandal_get_in_channel_value(BUSV_CHANNEL), BUSV_LOCATION, BUSV_ROW,
-                    BUSV_SIZE, BUSV_ALIGNMENT, BUSV_DECIMAL);
-        }
-        
-        if(scandal_get_in_channel_rcvd_time(CC_CHANNEL) > cc_updated){
-            if(scandal_get_in_channel_value(CC_CHANNEL)){
-                //TODO updateString(
-            } else {
-           
-            }
-        }
+
+		updateString("CC", CC_LOCATION, CC_ROW);
+		updateString("KMH", 17, 0);
+		updateString("PC", PC_LOCATION, PC_ROW);
+
+            
         
 		drawLCD();
 		
 		//TODO blinker stuffs
 		
 		/* Tickle the watchdog so we don't reset */
-		WDT_Feed();
+		///WDT_Feed();
 	}
 }
