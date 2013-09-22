@@ -16,11 +16,11 @@
 #ifdef THIS_DEVICE_TYPE
 #error "Device type multiply defined (redefined to MINING2)"
 #endif
-#define THIS_DEVICE_TYPE       MSPLCD
+#define THIS_DEVICE_TYPE       TEMPLATE
 
 /* Number of channels */
-#define NUM_IN_CHANNELS		MSPLCD_NUM_IN_CHANNELS
-#define NUM_OUT_CHANNELS 	MSPLCD_NUM_OUT_CHANNELS
+#define NUM_IN_CHANNELS		13
+#define NUM_OUT_CHANNELS 	1
 
 /* Size of send/receive buffers */
 #define CAN_TX_BUFFER_BITS	4

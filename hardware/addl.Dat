@@ -1,0 +1,37 @@
+Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~addl.PrjPcb|ReportField=ProjectFullPath~C:\Users\Radha\Desktop\sunswift\add\addl\hardware\addl.PrjPcb|ReportField=Title~Bill of Materials For Project [addl.PrjPcb] (No PCB Document Selected)|ReportField=TotalQuantity~77|ReportField=ReportTime~12:25:01 AM|ReportField=ReportDate~19/06/2013|ReportField=ReportDateTime~19/06/2013 12:25:01 AM|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~19/06/2013|ReportField=CurrentTime~12:23:49 AM|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Users\Radha\Desktop\sunswift\add\addl\hardware\main-sch.SchDoc|ReportField=DocumentName~main-sch.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~18/06/2013|ReportField=Organization~|ReportField=ProjectName~addl.PrjPcb|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~addl.PrjPcb|ReportField=DataSourceFullPath~C:\Users\Radha\Desktop\sunswift\add\addl\hardware\addl.PrjPcb
+CAP|Capacitor|C1, C2, C3, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15, C16, C17, C18|0603|CAP, CAP1|17
+CAP|Capacitor|C4|1206|CAP|1
+DC-DC SWITCHER|DC-DC SWITCHER|D1|PFM-7|lmz12001|1
+FT311D|USB ANDROID Host IC|FT1|QFP32|FT311D|1
+HOLE|Hole|H2, H4|M2.5|HOLE|2
+CON5-S|Connector, 2 pin, with shield @ S|J1, J2|TRIAD5F|CON5-S|2
+USB_MINIB|USB Mini B Connector|J3|USBMINIB|USB_miniB_SMT|1
+PGND|Power Ground (currently assumed that it is provided through a min-anderson connector)|JP1|POWERPOLE25A|CON1|1
+CON1|Currently assumed that the mini-anderson connector provides 12V|JP2|POWERPOLE25A|CON1|1
+INDUCTOR|Inductor|L1|1812|INDUCTOR|1
+LED||L2, L3|0805LED|LED|2
+LED for Blink Testing||L4|0805LED|LED|1
+Header 2X2|Header, 2-Pin, Dual row|P1, P2|HDR2X2|Header 2X2|2
+Header 4|Header, 4-Pin|P3, P4|HDR1X4|Header 4|2
+RES1|Resistor|R1, R3, R4, R5, R6, R7, R9, R12, R13, R14, R15, R20, R21, R24, R25|0603|RES1|15
+For normal operation, ground AB. To implement autobaud, pull AB high.|Resistor|R2|0603|RES1|1
+Leave Open for SPI(Slave)|Resistor|R8|0603|RES1|1
+Leave open for UART|Resistor|R10|0603|RES1|1
+27|Resistor|R11|0603|RES1|1
+Res Semi|Semiconductor Resistor|R16, R17, R18, R19, R22, R23|0603|Res Semi|6
+TP_CAN_SIG|TEST POINT for 12V on CAN|TP1|TESTPOINT|TEST|1
+TEST|TEST POINT|TP2|TESTPOINT|TEST|1
+TP_CAN_H|TEST POINT|TP3|TESTPOINT|TEST|1
+TP_RX|TEST POINT|TP5|TESTPOINT|TEST|1
+TP_AVCC|TEST POINT|TP6|TESTPOINT|TEST|1
+TP_USB5V|TEST POINT|TP7|TESTPOINT|TEST|1
+TP_USB3V3|TEST POINT|TP8|TESTPOINT|TEST|1
+SN65HVD235. pull Rs Hi for standby|3.3V CAN XCVR W/STANDBY|U1|SO8|SN65HVD235|1
+MIC5200|MIC5200 - SO8|U2|SO8|MIC5200|1
+FT232R||U3|SSOP28w|FT232R|1
+Dual Analog Switches for FT311D signals selection|Ultra-low resistance dual SPDT Analog switch|U4|Micro10|NLAS4684|1
+LPC11C14|NXP LPC11C14 Microcontroller|U5|QFP48|LPC11C14_Full|1
+24AAXX|I2C EEPROM for SOT23-5 package|U6|SOT23-5|24AAXX|1
+XC61CN2002MR|SOT23 reset generator|U7|SOT23-3|XC61F|1
+Dual Analog Switches for LCD signal selection for serial LCD|Ultra-low resistance dual SPDT Analog switch|U8|Micro10|NLAS4684|1
+12 MHz|Crystal|Y1, Y2|HC49/4H|CRYSTAL|2

@@ -1,0 +1,6 @@
+Record=SheetSymbol|SourceDocument=main-sch.SchDoc|Designator=CAN|SchDesignator=CAN|FileName=can.SchDoc|SymbolType=Normal|RawFileName=can.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=main-sch.SchDoc|Designator=DC-DC|SchDesignator=DC-DC|FileName=dc-dc.SchDoc|SymbolType=Normal|RawFileName=dc-dc.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=main-sch.SchDoc|Designator=FT311D|SchDesignator=FT311D|FileName=ft311d.SchDoc|SymbolType=Normal|RawFileName=ft311d.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=main-sch.SchDoc|Designator=LPC11C14|SchDesignator=LPC11C14|FileName=lpc11c14.SchDoc|SymbolType=Normal|RawFileName=lpc11c14.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=main-sch.SchDoc|Designator=USB-SERIAL|SchDesignator=USB-SERIAL|FileName=usb-serial.SchDoc|SymbolType=Normal|RawFileName=usb-serial.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=TopLevelDocument|FileName=main-sch.SchDoc

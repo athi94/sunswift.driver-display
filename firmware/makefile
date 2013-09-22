@@ -6,7 +6,10 @@
 CHIP = lpc11c14
 
 # This should be what your main C file is called
-MAIN_NAME = driver-display
+MAIN_NAME = template
+
+# This is the unique identifier name for the project
+PROJECT_NAME = DRIVERDISPLAY
 
 # Directory definitions
 ROOT = ..
@@ -14,17 +17,18 @@ SCANDAL = $(ROOT)/scandal
 ARCH = $(SCANDAL)/src/arch/$(CHIP)
 DRIVERS = $(ARCH)/drivers
 UTILS = $(ROOT)/utilities
+TOOLS = $(UTILS)/tools/bin
 BUILD = ./build# never . or clean will delete everything
 SRC = ./src
 
 # Custom project objects
-OBJECTS  = $(MAIN_NAME).o lcd.o scandal_obligations.o
+OBJECTS  = $(MAIN_NAME).o scandal_obligations.o Page.o Coordinate.o Parameter.o Lcd.o Line.o Slider.o DataSource.o
 # Scandal objects
 OBJECTS += engine.o error.o manager.o maths.o message.o utils.o stdio.o leds.o wavesculptor.o
 # Driver objects
 OBJECTS += can.o flash.o uart.o gpio.o timer.o wdt.o system.o
 # Add other objects here or in the architecture specific makefile
-OBJECTS += 
+OBJECTS +=
 
 CFLAGS  = -I$(SCANDAL)/include # for scandal includes
 CFLAGS += -I$(ARCH)/include # for arch drivers
@@ -80,7 +84,7 @@ $(BUILD)/%.o: $(SCANDAL)/src/drivers/%.c
 # Remove the build directory
 clean:
 	@echo "[CLEAN] $(BUILD)"
-	@if [ "$(BUILD)" == "." ]; then echo -e "$(RED)Don't use . as BUILD$(NORMAL)"; exit 1; fi
+	@if [ "$(BUILD)" = "." ]; then echo -e "$(RED)Don't use . as BUILD$(NORMAL)"; exit 1; fi
 	@rm -Rf $(BUILD)
 
 # Remove build directory and cscope
